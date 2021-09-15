@@ -75,6 +75,30 @@ new Module().then(loadedModule =>
 	ffish = loadedModule
 	console.log("ffish.js initialized!")
 
+	// Very hacked up version of Moore Chess
+	// https://www.reddit.com/r/chessvariants/comments/pjqz9q/moore_chess_variant/
+	// Does NOT include promotion at the moment!
+	// Notation is also wrong (pawn moves start with P, no check/mate indicators)
+	const variantConfig = `[moore-hacky:chess]
+bishop = -
+rook = -
+king = -
+knight = -
+queen = r
+pawn = -
+centaur = k
+customPiece1 = q:QNN
+customPiece2 = b:NN
+customPiece3 = n:CZ
+customPiece4 = p:mfKcfsffN
+castlingKingPiece = k
+castlingRookPiece = r
+extinctionValue = loss
+extinctionPieceTypes = k
+extinctionPseudoRoyal = true`
+
+	ffish.loadVariantConfig(variantConfig)
+
 	initBoard(dropdownVariant.value)
 
 	const config =
@@ -242,7 +266,7 @@ function isCapture(board, move)
 
 	// En passant
 	if (pieces[moveFrom[0]][moveFrom[1]].toLowerCase() === "p")
-		return (moveFrom[1]) !== (moveTo[1])
+		return (moveFrom[1]) !== (moveTo[1]) && (board.variant() !== "moore-hacky")
 
 	return false
 }
