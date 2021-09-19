@@ -189,34 +189,9 @@ function getDests(board)
 	return dests
 }
 
-function isGameOver(board)
-{
-	if (board.hasInsufficientMaterial())
-		return true;
-	if (board.isOptionalGameEnd())
-		return true;
-	return board.legalMoves().length === 0
-}
-
-function getGameResult(board)
-{
-	let value = 0
-	if (!board.hasInsufficientMaterial() && !board.isOptionalGameEnd())
-		value = board.gameResult()
-	if (!board.turn())
-		value = -value
-
-	if (value < 0)
-		return "0-1"
-	else if (value > 0)
-		return "1-0"
-	else
-		return "1/2-1/2"
-}
-
 function getColorOrUndefined(board)
 {
-	if (isGameOver(board))
+	if (board.isGameOver(true))
 		return undefined
 	return getColor(board)
 }
@@ -274,7 +249,7 @@ function isCapture(board, move)
 
 function aiPlayMove()
 {
-	if (isGameOver(board))
+	if (board.isGameOver(true))
 		return
 
 	const moves = board.legalMoves().split(" ")
@@ -361,7 +336,7 @@ function afterMove(capture)
 		soundMove.play()
 	}
 
-	if (isGameOver(board))
+	if (board.isGameOver(true))
 	{
 		soundTerminal.currentTime = 0.0
 		soundTerminal.play()
@@ -399,8 +374,9 @@ function getPgn(board)
 		pgn += board.sanMove(move) + " "
 		board.push(move)
 	}
-	if (isGameOver(board))
-		pgn += getGameResult(board)
+	const result = board.result(true)
+	if (result !== "*")
+		pgn += result
 	return pgn.trim()
 }
 
@@ -435,7 +411,7 @@ function updateChessground()
 		buttonUndo.disabled = false
 	}
 
-	if (isGameOver(board))
+	if (board.isGameOver(true))
 	{
 		buttonAi.disabled = true
 	}
