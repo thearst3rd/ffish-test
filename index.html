@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>ffish.js test</title>
+		<link rel="stylesheet" href="assets/chessground.css"/>
+		<link rel="stylesheet" href="assets/theme-backgrounds.css"/>
+		<link rel="stylesheet" href="assets/theme-merida.css"/>
+		<link rel="stylesheet" href="assets/theme-tatiana.css"/>
+		<link rel="stylesheet" href="assets/theme-merida-knightmate.css"/>
+		<link rel="stylesheet" href="assets/theme-tatiana-knightmate.css"/>
+	</head>
+
+	<body>
+		<header>
+			<h1>ffish.js test</h1>
+		</header>
+		<main>
+			<div>
+				<h2>with chessgroundx</h2>
+				<select id="dropdown-variant" style="margin-bottom: 10px;">
+					<option value="chess">Chess</option>
+					<option value="antichess">Antichess</option>
+					<option value="atomic">Atomic</option>
+					<option value="3check">Three-check</option>
+					<option value="knightmate">Knightmate</option>
+					<option value="almost">Almost Chess</option>
+					<option value="chigorin">Chigorin</option>
+					<option value="hoppelpoppel">Hoppel-Poppel</option>
+					<option value="nightrider">Nightrider</option>
+				</select>
+				<input id="button-set-variant" type="button" value="Set Variant"/>
+			</div>
+			<div id="chessground-container-div" class="purple merida">
+				<div id="chessground-board"></div>
+			</div>
+			<div style="margin-top: 20px;">
+				<input id="button-reset" type="button" value="New Game"/>
+				<input id="button-flip" type="button" value="Flip Board"/>
+				<input id="button-undo" type="button" value="Undo"/>
+				<input id="range-volume" type="range" min="0" max="1" value="0.4" step="0.05" style="margin-left: 8px;">Volume</input>
+				<input id="button-ai" type="button" value="Play Bot Move" style="margin-left: 6px;"/>
+			</div>
+			<div style="margin-top: 4px;">
+				<input id="check-auto-ai" type="checkbox">Auto-Play Bot Moves</input>
+				<input id="check-dests" type="checkbox" checked>Show Dests</input>
+			</div>
+			<div style="margin-top: 20px;">
+				<input id="text-fen" type="text" style="width: 550px;"/>
+				<input id="button-set-fen" type="button" value="Set FEN"/>
+			</div>
+			<p id="label-pgn"></p>
+		</main>
+		<footer>
+			<hr/>
+			<p><i>View the source code on <a href="https://github.com/thearst3rd/ffish-test">GitHub</a>!</i></p>
+		</footer>
+		<script src="bundle.js" defer></script>
+	</body>
+</html>
